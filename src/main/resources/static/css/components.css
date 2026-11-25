@@ -1,0 +1,88 @@
+
+/* SmartPark reusable UI components */
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+input, select {
+    background: #0d1924;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 11px 13px;
+    outline: none;
+    width: 100%;
+}
+
+input:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(32, 214, 160, 0.08);
+}
+
+input::placeholder {
+    color: #607587;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th {
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    color: var(--text-secondary);
+    font-size: 12px;
+    padding: 15px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+tr:hover td {
+    background: rgba(32, 214, 160, 0.025);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 20px;
+    padding: 6px 10px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.badge-success {
+    background: rgba(32, 214, 160, 0.10);
+    color: var(--accent);
+}
+
+.badge-warning {
+    background: rgba(245, 166, 74, 0.10);
+    color: var(--orange);
+}
+
+.empty-state {
+    padding: 35px;
+    text-align: center;
+    color: var(--text-muted);
+}

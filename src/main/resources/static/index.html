@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#0b1118">
+
+    <title>SmartPark 360 | Operations Center</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- NAVIGATION -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">P</div>
+            <div>
+                <h2>SMARTPARK<span>360</span></h2>
+                <small>OPERATIONS PLATFORM</small>
+            </div>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav class="navigation">
+            <a href="index.html" class="nav-item active">
+                <span>◈</span> Command Center
+            </a>
+
+            <a href="pages/parking.html" class="nav-item">
+                <span>▦</span> Parking Map
+            </a>
+
+            <a href="pages/vehicles.html" class="nav-item">
+                <span>◉</span> Vehicle Operations
+            </a>
+
+            <a href="pages/payments.html" class="nav-item">
+                <span>◇</span> Revenue Center
+            </a>
+
+            <a href="pages/history.html" class="nav-item">
+                <span>↺</span> Parking History
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="system-status">
+                <span class="status-dot"></span>
+                <div>
+                    <strong>System Online</strong>
+                    <small>Backend connection</small>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                SMARTPARK 360 · VERSION 1.0
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <div class="breadcrumb">WORKSPACE / OVERVIEW</div>
+                <h1>Command Center</h1>
+            </div>
+
+            <div class="topbar-right">
+                <div class="live-indicator">
+                    <span class="status-dot"></span>
+                    LIVE SYSTEM
+                </div>
+
+                <div class="profile">
+                    <div class="profile-avatar">A</div>
+                    <div>
+                        <strong>Administrator</strong>
+                        <small>Parking Manager</small>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="welcome-section">
+            <div>
+                <span class="eyebrow">PARKING OPERATIONS OVERVIEW</span>
+                <h2>Everything under <span>control.</span></h2>
+                <p>Monitor parking capacity, vehicle movements and revenue from one place.</p>
+            </div>
+
+            <button class="primary-btn" id="addVehicleBtn">
+                + Register Vehicle
+            </button>
+        </section>
+
+        <!-- STATISTICS -->
+        <section class="stats-grid">
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Total Capacity</span>
+                    <span class="stat-icon">▦</span>
+                </div>
+                <h2 id="totalSlots">--</h2>
+                <small>Registered parking slots</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Occupied Slots</span>
+                    <span class="stat-icon occupied-icon">◉</span>
+                </div>
+                <h2 id="occupiedSlots">--</h2>
+                <small>Currently in use</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Available Slots</span>
+                    <span class="stat-icon available-icon">✓</span>
+                </div>
+                <h2 id="availableSlots">--</h2>
+                <small>Ready for incoming vehicles</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Active Vehicles</span>
+                    <span class="stat-icon vehicle-icon">◈</span>
+                </div>
+                <h2 id="activeVehicles">--</h2>
+                <small>Currently parked vehicles</small>
+            </article>
+
+        </section>
+
+        <!-- PARKING OVERVIEW -->
+        <section class="content-grid">
+
+            <article class="panel occupancy-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">CAPACITY MONITOR</span>
+                        <h3>Parking Occupancy</h3>
+                    </div>
+                    <span class="live-tag">LIVE</span>
+                </div>
+
+                <div class="occupancy-content">
+                    <div class="occupancy-ring" id="occupancyRing">
+                        <div class="ring-center">
+                            <h2 id="occupancyPercent">--%</h2>
+                            <small>OCCUPANCY</small>
+                        </div>
+                    </div>
+
+                    <div class="legend">
+                        <div><span class="legend-dot green"></span>
+                            Available <strong id="legendAvailable">--</strong>
+                        </div>
+                        <div><span class="legend-dot orange"></span>
+                            Occupied <strong id="legendOccupied">--</strong>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="panel quick-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">QUICK OPERATIONS</span>
+                        <h3>Manage Vehicles</h3>
+                    </div>
+                </div>
+
+                <button class="operation-btn" id="parkVehicleBtn">
+                    <span class="operation-icon">↗</span>
+                    <span>
+                        <strong>Vehicle Entry</strong>
+                        <small>Register and allocate a parking slot</small>
+                    </span>
+                    <b>→</b>
+                </button>
+
+                <button class="operation-btn" id="exitVehicleBtn">
+                    <span class="operation-icon">↙</span>
+                    <span>
+                        <strong>Vehicle Exit</strong>
+                        <small>Process exit and calculate payment</small>
+                    </span>
+                    <b>→</b>
+                </button>
+
+                <button class="operation-btn" id="viewSlotsBtn">
+                    <span class="operation-icon">▦</span>
+                    <span>
+                        <strong>View Parking Map</strong>
+                        <small>Inspect parking slot availability</small>
+                    </span>
+                    <b>→</b>
+                </button>
+            </article>
+
+        </section>
+
+        <!-- SLOT PREVIEW -->
+        <section class="panel slots-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">REAL-TIME SLOT TRACKER</span>
+                    <h3>Parking Space Overview</h3>
+                </div>
+                <a href="pages/parking.html" class="text-link">View all slots →</a>
+            </div>
+
+            <div class="slot-legend">
+                <span><i class="legend-dot green"></i> Available</span>
+                <span><i class="legend-dot orange"></i> Occupied</span>
+            </div>
+
+            <div id="slotPreview" class="slot-grid">
+                <p>Loading parking slots...</p>
+            </div>
+
+            
+        </section>
+
+
+<!-- SMARTPARK 360 - ADVANCED ANALYTICS -->
+
+<section class="analytics-section" id="analyticsSection">
+
+    <div class="analytics-heading">
+        <div>
+            <span class="section-label">INTELLIGENCE & INSIGHTS</span>
+            <h2>Operations Analytics</h2>
+            <p>Understand parking activity, vehicle distribution and revenue.</p>
+        </div>
+
+        <span class="analytics-live">● LIVE DATA</span>
+    </div>
+
+    <!-- VEHICLE DISTRIBUTION AND PARKING UTILIZATION -->
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+            <div class="analytics-card-heading">
+                <div>
+                    <span class="section-label">FLEET ANALYSIS</span>
+                    <h3>Vehicle Distribution</h3>
+                </div>
+                <span class="analytics-icon">◉</span>
+            </div>
+
+            <div id="vehicleAnalytics">
+                <p class="analytics-loading">Loading vehicle analytics...</p>
+            </div>
+        </div>
+
+        <div class="analytics-card">
+            <div class="analytics-card-heading">
+                <div>
+                    <span class="section-label">CAPACITY INTELLIGENCE</span>
+                    <h3>Parking Utilization</h3>
+                </div>
+                <span class="analytics-icon">▦</span>
+            </div>
+
+            <div id="utilizationAnalytics">
+                <p class="analytics-loading">Loading utilization...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- REVENUE ANALYTICS -->
+
+    <div class="analytics-card revenue-analytics-card">
+
+        <div class="analytics-card-heading">
+            <div>
+                <span class="section-label">FINANCIAL PERFORMANCE</span>
+                <h3>Revenue Overview</h3>
+                <p>Successful parking payments over the last seven days.</p>
+            </div>
+
+            <div class="revenue-total">
+                <span>Total Collected</span>
+                <strong id="analyticsTotalRevenue">₹0.00</strong>
+            </div>
+        </div>
+
+        <div id="revenueAnalytics">
+            <p class="analytics-loading">Loading revenue analytics...</p>
+        </div>
+
+    </div>
+
+    <!-- RECENT TRANSACTIONS -->
+
+    <div class="analytics-card recent-activity-card">
+
+        <div class="analytics-card-heading">
+            <div>
+                <span class="section-label">LATEST ACTIVITY</span>
+                <h3>Recent Transactions</h3>
+            </div>
+
+            <a href="pages/payments.html" class="analytics-view-link">
+                View all →
+            </a>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Record ID</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+
+                <tbody id="recentTransactions">
+                    <tr>
+                        <td colspan="5">Loading transactions...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</section>
+
+
+        <footer class="main-footer">
+            SMARTPARK 360 <span>·</span> INTELLIGENT PARKING MANAGEMENT
+            <span id="lastUpdated">Connecting to server...</span>
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/parking.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

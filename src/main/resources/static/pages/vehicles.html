@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Operations | SmartPark 360</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+
+<body>
+<div class="app-shell">
+
+    <aside class="sidebar">
+        <a href="../index.html" class="brand">
+            <span class="brand-icon">P</span>
+            <span>
+                <strong>SMARTPARK<span>360</span></strong>
+                <small>OPERATIONS PLATFORM</small>
+            </span>
+        </a>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="nav-link">◈ <span>Command Center</span></a>
+            <a href="parking.html" class="nav-link">▦ <span>Parking Map</span></a>
+            <a href="vehicles.html" class="nav-link active">◉ <span>Vehicle Operations</span></a>
+            <a href="payments.html" class="nav-link">◇ <span>Revenue Center</span></a>
+            <a href="history.html" class="nav-link">↻ <span>Parking History</span></a>
+        </nav>
+
+        <div class="sidebar-status">
+            <span class="status-dot"></span>
+            <div>
+                <strong>System Online</strong>
+                <small>Backend connection</small>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">SMARTPARK 360 · VERSION 1.0</div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <span class="section-label">VEHICLE MANAGEMENT</span>
+                <h2>Vehicle Operations</h2>
+            </div>
+            <span class="system-badge">● SYSTEM ONLINE</span>
+        </header>
+
+        <section class="welcome-section">
+            <div>
+                <span class="section-label">FLEET MANAGEMENT</span>
+                <h1>Vehicle Control Center</h1>
+                <p>Register vehicles and monitor active parking sessions.</p>
+            </div>
+        </section>
+
+        <div id="pageContent"></div>
+
+        <footer class="dashboard-footer">
+            <span>SMARTPARK 360</span>
+            <span>VEHICLE MANAGEMENT</span>
+            <span>OPERATIONS PLATFORM</span>
+        </footer>
+
+    </main>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/vehicles.js"></script>
+</body>
+</html>

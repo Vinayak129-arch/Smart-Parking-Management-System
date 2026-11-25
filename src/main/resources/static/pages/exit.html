@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vehicle Exit | SmartPark 360</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <link rel="stylesheet" href="../css/exit.css">
+</head>
+
+<body>
+<div class="app-shell">
+
+    <aside class="sidebar">
+        <a href="../index.html" class="brand">
+            <span class="brand-icon">P</span>
+            <span>
+                <strong>SMARTPARK<span>360</span></strong>
+                <small>OPERATIONS PLATFORM</small>
+            </span>
+        </a>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="nav-link">◈ <span>Command Center</span></a>
+            <a href="parking.html" class="nav-link">▦ <span>Parking Map</span></a>
+            <a href="vehicles.html" class="nav-link active">◉ <span>Vehicle Operations</span></a>
+            <a href="payments.html" class="nav-link">◇ <span>Revenue Center</span></a>
+            <a href="history.html" class="nav-link">↻ <span>Parking History</span></a>
+        </nav>
+
+        <div class="sidebar-status">
+            <span class="status-dot"></span>
+            <div>
+                <strong>System Online</strong>
+                <small>Backend connection</small>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">SMARTPARK 360 · VERSION 1.0</div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <span class="section-label">VEHICLE OPERATIONS</span>
+                <h2>Vehicle Exit Processing</h2>
+            </div>
+
+            <span class="system-badge">● SYSTEM ONLINE</span>
+        </header>
+
+        <section class="welcome-section">
+            <div>
+                <span class="section-label">PARKING CHECKOUT</span>
+                <h1>Complete Vehicle Exit</h1>
+                <p>Review parking details, select payment method and generate a receipt.</p>
+            </div>
+        </section>
+
+        <div id="exitMessage" class="exit-message" hidden></div>
+
+        <section id="exitWorkspace" class="exit-layout">
+
+            <div class="panel exit-details-panel">
+                <span class="section-label">VEHICLE INFORMATION</span>
+                <h2>Parking Session Details</h2>
+
+                <div class="vehicle-identity">
+                    <div class="vehicle-icon">🚘</div>
+                    <div>
+                        <h3 id="exitVehicleNumber">Loading...</h3>
+                        <span id="exitVehicleType">Vehicle</span>
+                    </div>
+                </div>
+
+                <div class="detail-list">
+                    <div class="detail-row">
+                        <span>Owner Name</span>
+                        <strong id="exitOwnerName">--</strong>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Parking Slot</span>
+                        <strong id="exitSlotNumber">--</strong>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Entry Time</span>
+                        <strong id="exitEntryTime">--</strong>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Current Status</span>
+                        <strong class="active-status">ACTIVE</strong>
+                    </div>
+                </div>
+
+                <a href="vehicles.html" class="back-link">
+                    ← Back to Vehicle Operations
+                </a>
+            </div>
+
+            <div class="panel exit-payment-panel">
+                <span class="section-label">PAYMENT PROCESSING</span>
+                <h2>Complete Payment</h2>
+                <p>Select the payment method to process the parking fee.</p>
+
+                <form id="exitPaymentForm">
+
+                    <label class="payment-label">Payment Method</label>
+
+                    <div class="payment-options">
+
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod"
+                                value="CASH" checked>
+                            <span class="payment-option-content">
+                                <span class="payment-symbol">₹</span>
+                                <strong>Cash</strong>
+                                <small>Pay at counter</small>
+                            </span>
+                        </label>
+
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod"
+                                value="UPI">
+                            <span class="payment-option-content">
+                                <span class="payment-symbol">⌁</span>
+                                <strong>UPI</strong>
+                                <small>Digital payment</small>
+                            </span>
+                        </label>
+
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod"
+                                value="CARD">
+                            <span class="payment-option-content">
+                                <span class="payment-symbol">▣</span>
+                                <strong>Card</strong>
+                                <small>Debit / Credit</small>
+                            </span>
+                        </label>
+
+                    </div>
+
+                    <div class="fee-information">
+                        <span>Parking fee</span>
+                        <strong>Calculated at checkout</strong>
+                        <small>Final fee is calculated by the parking backend.</small>
+                    </div>
+
+                    <button type="submit" id="confirmExitBtn"
+                        class="btn btn-primary confirm-exit-btn">
+                        Confirm Exit & Generate Receipt
+                    </button>
+
+                </form>
+            </div>
+
+        </section>
+
+        <section id="receiptSection" class="panel receipt-panel" hidden>
+
+            <div class="receipt-success">
+                <div class="success-icon">✓</div>
+                <span class="section-label">TRANSACTION SUCCESSFUL</span>
+                <h2>Vehicle Exit Completed</h2>
+                <p>Payment processed and parking slot released successfully.</p>
+            </div>
+
+            <div id="receiptContent" class="receipt-content"></div>
+
+            <div class="receipt-actions">
+                <button class="btn btn-primary" id="printReceiptBtn">
+                    Print Receipt
+                </button>
+
+                <a href="vehicles.html" class="btn btn-secondary">
+                    Back to Vehicles
+                </a>
+
+                <a href="payments.html" class="btn btn-secondary">
+                    View Payments
+                </a>
+            </div>
+
+        </section>
+
+        <footer class="dashboard-footer">
+            <span>SMARTPARK 360</span>
+            <span>SECURE PARKING CHECKOUT</span>
+            <span id="connectionStatus">Ready</span>
+        </footer>
+
+    </main>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/exit.js"></script>
+
+</body>
+</html>

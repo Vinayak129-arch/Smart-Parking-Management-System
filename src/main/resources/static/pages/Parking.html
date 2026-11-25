@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Map | SmartPark 360</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+
+<body>
+<div class="app-shell">
+
+    <aside class="sidebar">
+        <a href="../index.html" class="brand">
+            <span class="brand-icon">P</span>
+            <span>
+                <strong>SMARTPARK<span>360</span></strong>
+                <small>OPERATIONS PLATFORM</small>
+            </span>
+        </a>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="nav-link">
+                ◈ <span>Command Center</span>
+            </a>
+            <a href="parking.html" class="nav-link active">
+                ▦ <span>Parking Map</span>
+            </a>
+            <a href="vehicles.html" class="nav-link">
+                ◉ <span>Vehicle Operations</span>
+            </a>
+            <a href="payments.html" class="nav-link">
+                ◇ <span>Revenue Center</span>
+            </a>
+            <a href="history.html" class="nav-link">
+                ↻ <span>Parking History</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-status">
+            <span class="status-dot"></span>
+            <div>
+                <strong>System Online</strong>
+                <small>Backend connection</small>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">SMARTPARK 360 · VERSION 1.0</div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <span class="section-label">PARKING MANAGEMENT</span>
+                <h2>Parking Map</h2>
+            </div>
+            <span class="system-badge">● SYSTEM ONLINE</span>
+        </header>
+
+        <section class="welcome-section">
+            <div>
+                <span class="section-label">REAL-TIME MONITORING</span>
+                <h1>Parking Space Control</h1>
+                <p>Monitor parking capacity and manage vehicle movement.</p>
+            </div>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span>Total Slots</span>
+                <h2 id="parkingTotal">--</h2>
+            </div>
+            <div class="stat-card">
+                <span>Occupied</span>
+                <h2 id="parkingOccupied">--</h2>
+            </div>
+            <div class="stat-card">
+                <span>Available</span>
+                <h2 id="parkingAvailable">--</h2>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <span class="section-label">SLOT VISUALIZATION</span>
+                    <h2>Live Parking Layout</h2>
+                    <p>Green indicates available; orange indicates occupied.</p>
+                </div>
+                <button class="btn btn-primary" id="refreshSlotsBtn">
+                    Refresh Slots
+                </button>
+            </div>
+
+            <div class="slot-legend">
+                <span>🟢 Available</span>
+                <span>🟠 Occupied</span>
+            </div>
+
+            <div id="slotPreview" class="slot-grid">
+                Loading parking slots...
+            </div>
+        </section>
+
+        <section class="panel">
+            <span class="section-label">VEHICLE OPERATIONS</span>
+            <h2>Manage Parking Entry and Exit</h2>
+
+            <div class="quick-actions">
+                <button class="btn btn-primary" id="addVehicleBtn">
+                    + Vehicle Entry
+                </button>
+
+                <button class="btn btn-primary" id="exitVehicleBtn">
+                    Vehicle Exit
+                </button>
+
+                <button class="btn btn-secondary" id="viewSlotsBtn">
+                    View Slot Layout
+                </button>
+            </div>
+        </section>
+
+        <footer class="dashboard-footer">
+            <span>SMARTPARK 360</span>
+            <span>INTELLIGENT PARKING MANAGEMENT</span>
+            <span id="connectionStatus">Connecting to server...</span>
+        </footer>
+
+    </main>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/dashboard.js"></script>
+<script src="../js/parking.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+    async function refreshParkingMap() {
+        try {
+            const [slots, summary] = await Promise.all([
+                SmartParkAPI.getSlots(),
+                SmartParkAPI.getSummary()
+            ]);
+
+            renderParkingSlots(slots);
+
+            document.getElementById("parkingTotal").textContent =
+                summary.totalSlots ?? "--";
+
+            document.getElementById("parkingOccupied").textContent =
+                summary.occupiedSlots ?? "--";
+
+            document.getElementById("parkingAvailable").textContent =
+                summary.availableSlots ?? "--";
+
+            document.getElementById("connectionStatus").textContent =
+                "Connected to server";
+
+        } catch (error) {
+            document.getElementById("slotPreview").textContent =
+                "Unable to load parking slots: " + error.message;
+
+            document.getElementById("connectionStatus").textContent =
+                "Backend connection failed";
+        }
+    }
+
+    document.getElementById("refreshSlotsBtn")
+        .addEventListener("click", refreshParkingMap);
+
+    await refreshParkingMap();
+});
+</script>
+
+</body>
+</html>
